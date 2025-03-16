@@ -12,6 +12,7 @@ def chat_server():
     SOCKET_LIST.append(server_socket)   #5 WHEN SERVER SOCKET ISS USED IT GOES AND SITS IN SOCKET_LIST
     print ("CHAT SERVER STARTED LISTNING "+str(PORT))
     while True:
+        
     #waiting th flow for new incoming connections
         ready_read,ready_write,write = sel.select(SOCKET_LIST,[],[],0)
         for sock in ready_read:
@@ -20,6 +21,7 @@ def chat_server():
                 SOCKET_LIST.append(sockfd)
                 print ("client "+addr+"connected")
                 #TODO: ACCEPT MESSAG AND BROADCAST
+           
             else :
                 try:
                     data = sock.recv(RECEIVE_BUFF)
