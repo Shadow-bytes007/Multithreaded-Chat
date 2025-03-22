@@ -22,14 +22,14 @@ def chat_client():
 
     print("Connected to remote host. You can start sending messages...")
 
-    SOCKET_LIST = [sys.stdin, s]
+    SOCKET_LIST = [s]
     sys.stdout.write("> ")
     sys.stdout.flush()
 
     while True:
         read_ready, read_write, error = sel.select(SOCKET_LIST, [], [])
         
-        for sock in read_ready:
+        for sock in read_ready: 
             if sock == s:
                 data = sock.recv(4096)
                 if not data:
@@ -40,7 +40,7 @@ def chat_client():
                     sys.stdout.write("\n> ")
                     sys.stdout.flush()
             else:
-                msg = sys.stdin.readline()
+                msg = input("YOU > ")
                 s.send(msg.encode())
                 sys.stdout.write("> ")
                 sys.stdout.flush()
